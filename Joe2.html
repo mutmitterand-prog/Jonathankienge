@@ -1,0 +1,822 @@
+<!DOCTYPE html>  
+<html lang="fr">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>JONATHAN KIENGE</title>  
+    <style>  
+        /* --- RESET ET POLICE --- */  
+        * {  
+            margin: 0;  
+            padding: 0;  
+            box-sizing: border-box;  
+            font-family: 'Arial', sans-serif;  
+        }  
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* --- EN-TÊTE ET LOGO --- */  
+        header {  
+            background-color: #ffffff;  
+            display: flex;  
+            justify-content: center;  
+            padding: 10px 0;  
+            border-bottom: 1px solid #e0e0e0;  
+        }  
+        
+        .pres-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            height: 70px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .pres-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        @keyframes zoomFadeIn {  
+            from {  
+                transform: scale(0.8);  
+                opacity: 0;  
+            }  
+            to {  
+                transform: scale(1);  
+                opacity: 1;  
+            }
+        }
+
+        .pres-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #c9002b;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            animation: zoomFadeIn 1.5s ease-out;
+        }
+
+        .pres-text h1 {
+            font-size: 1.2rem;
+            color: #001f4d;
+            font-weight: 800;
+        }
+
+        .pres-text p {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* --- BOUTON BURGER --- */
+        .pres-burger {  
+            display: flex;  
+            flex-direction: column;  
+            justify-content: space-between;  
+            width: 24px;  
+            height: 18px;  
+            cursor: pointer;  
+        }  
+
+        .pres-burger span {  
+            display: block;  
+            height: 3px;  
+            width: 100%;  
+            background-color: #001f4d;  
+            border-radius: 2px;  
+            transition: 0.3s;  
+        }  
+
+        /* Animation du burger à l'état actif */
+        .pres-burger.active span:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+            background-color: #c9002b;
+        }
+        .pres-burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .pres-burger.active span:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+            background-color: #c9002b;
+        }
+
+        /* --- NAV PREMIUM INTERACTIVE --- */
+        .pres-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            transform: translateY(-20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s ease;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .pres-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .pres-menu a {  
+            display: block;  
+            color: #333;  
+            text-decoration: none;  
+            padding: 12px 20px;
+            font-weight: bold;  
+            font-size: 0.95rem;  
+            text-transform: uppercase;  
+            text-align: center;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }  
+
+        .pres-menu a:hover {  
+            color: #c9002b;  
+        }  
+
+        /* --- SECTION HERO --- */  
+        .hero {  
+            position: relative;  
+            width: 100%;  
+            height: 65vh;  
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)),   
+                        url('https://pbs.twimg.com/media/G9P7262XsAAoBBO?format=jpg&name=medium') no-repeat center center/cover;  
+            display: flex;  
+            align-items: center;  
+            justify-content: center;  
+            text-align: center;  
+            padding: 20px;  
+        }  
+
+        .hero-content {  
+            color: white;  
+            max-width: 90%;  
+        }  
+
+        .hero-title {  
+            font-size: 1.5rem;  
+            font-weight: 800;  
+            text-transform: uppercase;  
+            margin-bottom: 10px;  
+            letter-spacing: 1px;  
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);  
+        }  
+
+        .hero-subtitle {  
+            font-size: 1.2rem;  
+            font-weight: 400;  
+            margin-bottom: 15px;  
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);  
+        }  
+
+        .hero-slogan {  
+            font-size: 1.3rem;  
+            font-weight: 700;  
+            text-transform: uppercase;  
+            color: #ffffff;  
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);  
+        }  
+
+        /* --- SECTION À PROPOS --- */  
+        .about-bg-section {  
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.8)),   
+                        url('https://pbs.twimg.com/media/GiAAN1uWMAAWQde?format=jpg&name=medium') no-repeat center center/cover;  
+            color: white;  
+            padding: 30px 20px;  
+            border-radius: 6px;  
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);  
+            margin-bottom: 25px;  
+        }  
+
+        .about-block {  
+            margin-bottom: 25px;  
+        }  
+
+        .about-block:last-child {  
+            margin-bottom: 0;  
+        }  
+
+        .about-block h3 {  
+            color: #ff4d6d;  
+            font-size: 1.2rem;  
+            text-transform: uppercase;  
+            margin-bottom: 10px;  
+            letter-spacing: 0.5px;  
+        }  
+
+        .about-block p {  
+            color: #f0f0f0;  
+            font-size: 0.95rem;  
+            line-height: 1.6;  
+        }  
+
+        /* --- STYLE DES SECTIONS DE CONTENU STANDARDS --- */  
+        .container {  
+            padding: 20px;  
+            max-width: 800px;  
+            margin: 0 auto;  
+        }  
+
+        .section-title {  
+            font-size: 1.4rem;  
+            color: #001f4d;  
+            text-transform: uppercase;  
+            margin: 35px 0 15px 0;  
+            border-left: 4px solid #c9002b;  
+            padding-left: 10px;  
+            letter-spacing: 0.5px;  
+        }  
+
+        /* --- SYSTÈME D'ACCORDÉONS INTERACTIFS --- */  
+        .accordion-item {  
+            background: white;  
+            border-radius: 4px;  
+            margin-bottom: 10px;  
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);  
+            overflow: hidden;  
+        }  
+
+        .accordion-header {  
+            background-color: #001f4d;  
+            color: white;  
+            padding: 15px 20px;  
+            font-weight: bold;  
+            text-transform: uppercase;  
+            font-size: 0.95rem;  
+            cursor: pointer;  
+            display: flex;  
+            justify-content: space-between;  
+            align-items: center;  
+            user-select: none;  
+            transition: background 0.3s;  
+        }  
+
+        .accordion-header:hover {  
+            background-color: #002d6e;  
+        }  
+
+        .accordion-icon {  
+            font-size: 0.8rem;  
+            transition: transform 0.3s ease;  
+        }  
+
+        .accordion-content {  
+            max-height: 0;  
+            overflow: hidden;  
+            transition: max-height 0.3s ease-out;  
+            background-color: #ffffff;  
+        }  
+
+        .accordion-body {  
+            padding: 20px;  
+            color: #444;  
+            font-size: 0.95rem;  
+            border-top: 1px solid #eee;  
+            line-height: 1.6;  
+        }  
+
+        .accordion-item.active .accordion-icon {  
+            transform: rotate(180deg);  
+        }  
+
+        .accordion-item.active .accordion-header {  
+            background-color: #c9002b;  
+        }  
+
+        /* --- ZONE DE CONTENU ET D'ACTION --- */  
+        .content-block {  
+            background: white;  
+            padding: 20px;  
+            border-radius: 4px;  
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);  
+            margin-bottom: 20px;  
+        }  
+
+        .content-block h3 {  
+            margin-bottom: 10px;  
+            color: #c9002b;  
+            font-size: 1.1rem;  
+        }  
+
+        .content-block p {  
+            color: #444;  
+            font-size: 0.95rem;  
+            margin-bottom: 15px;  
+            line-height: 1.6;  
+        }  
+
+        .action-zone {  
+            display: flex;  
+            flex-direction: column;  
+            gap: 15px;  
+            margin-top: 15px;  
+        }  
+
+        .btn-action {  
+            display: block;  
+            width: 100%;  
+            text-align: center;  
+            background-color: #c9002b;  
+            color: white;  
+            padding: 14px;  
+            text-decoration: none;  
+            font-weight: bold;  
+            text-transform: uppercase;  
+            border-radius: 4px;  
+            letter-spacing: 0.5px;  
+            box-shadow: 0 2px 4px rgba(13,0,0,0.2);  
+        }  
+
+        /* --- ACTUALITÉS / CARDS --- */  
+        .card {  
+            background: white;  
+            border-radius: 4px;  
+            overflow: hidden;  
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);  
+            margin-bottom: 25px;  
+        }  
+
+        .card-image {  
+            width: 100%;  
+            height: 220px;  
+            object-fit: cover;  
+        }  
+
+        .card-content {  
+            padding: 15px;  
+        }  
+
+        .card-meta {  
+            display: flex;  
+            gap: 15px;  
+            font-size: 0.85rem;  
+            color: #777;  
+            margin-bottom: 10px;  
+            }  
+
+        .meta-tag {  
+            color: #c9002b;  
+            font-weight: bold;  
+        }  
+
+        .card-title {  
+            font-size: 1.1rem;  
+            font-weight: bold;  
+            text-transform: uppercase;  
+            margin-bottom: 10px;  
+            line-height: 1.4;  
+        }  
+
+        .card-excerpt {  
+            font-size: 0.95rem;  
+            color: #555;  
+            line-height: 1.5;  
+            margin-bottom: 15px;  
+        }  
+
+        .btn-more {  
+            display: inline-block;  
+            border: 1px solid #c9002b;  
+            color: #c9002b;  
+            padding: 8px 20px;  
+            text-decoration: none;  
+            border-radius: 4px;  
+            font-weight: bold;  
+            font-size: 0.9rem;  
+        }  
+
+        /* --- GALERIE --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- LIGHTBOX --- */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.92);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 12px;
+            /* état initial (petit + flou léger) */
+            transform: scale(0.6);
+            opacity: 0;
+            filter: blur(8px);
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.45s ease,
+                        filter 0.45s ease;
+        }
+
+        /* état actif (zoom fluide type Instagram) */
+        .lightbox.active img {
+            transform: scale(1);
+            opacity: 1;
+            filter: blur(0);
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* --- PIED DE PAGE & SOCIAUX --- */  
+        footer {  
+            background-color: #001f4d;  
+            color: white;  
+            padding: 30px 20px;  
+            text-align: center;  
+            font-size: 0.9rem;  
+        }  
+
+        .footer-section {  
+            margin-bottom: 25px;  
+        }  
+
+        .footer-title {  
+            font-weight: bold;  
+            text-transform: uppercase;  
+            border-bottom: 2px solid #c9002b;  
+            display: inline-block;  
+            padding-bottom: 5px;  
+            margin-bottom: 15px;  
+            letter-spacing: 1px;  
+        }  
+
+        .footer-text {  
+            line-height: 1.6;  
+            color: #e0e0e0;  
+            font-size: 0.85rem;  
+        }  
+
+        .social-links {  
+            margin-top: 15px;  
+            display: flex;  
+            justify-content: center;  
+            gap: 12px;  
+            flex-wrap: wrap;  
+        }  
+
+        .social-links a {  
+            color: #ffffff;  
+            text-decoration: none;  
+            background: rgba(255, 255, 255, 0.08);  
+            padding: 10px 16px;  
+            border-radius: 6px;  
+            font-size: 0.85rem;  
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }  
+
+        .social-links a:hover {  
+            background: rgba(255, 255, 255, 0.18);  
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {  
+            margin-top: 20px;  
+            padding-top: 15px;  
+            border-top: 1px solid rgba(255,255,255,0.1);  
+            font-size: 0.8rem;  
+            color: #aaa;  
+        }  
+
+        .scroll-top {  
+            position: fixed;  
+            bottom: 20px;  
+            right: 20px;  
+            background-color: #c9002b;  
+            color: white;  
+            width: 40px;  
+            height: 40px;  
+            border-radius: 4px;  
+            display: flex;  
+            align-items: center;  
+            justify-content: center;  
+            text-decoration: none;  
+            font-weight: bold;  
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);  
+        }  
+    </style>
+</head>  
+<body>  
+
+<header class="pres-header">  
+    <div class="pres-left">  
+        <img src="https://i.imgur.com/tawZCQQ.jpeg" class="pres-photo" alt="Jonathan Kienge">  
+        <div class="pres-text">  
+            <h1>JONATHAN KIENGE</h1>  
+            <p>Servir le peuple avec dignité et engagement</p>  
+        </div>  
+    </div>  
+    <div class="pres-burger" id="burger-menu-btn">  
+        <span></span>  
+        <span></span>  
+        <span></span>  
+    </div>
+</header>  
+
+<nav class="pres-menu" id="menu-dropdown">  
+    <a href="#accueil">Accueil</a>  
+    <a href="#apropos">À Propos</a>  
+    <a href="#vision">Vision Politique</a>  
+    <a href="#actualites">Actualités</a>  
+    <a href="#galerie">Galerie</a>  
+    <a href="#agir">Engagement</a>  
+</nav>  
+
+<section class="hero" id="accueil">  
+    <div class="hero-content">  
+        <h1 class="hero-title">JONATHAN KIENGE</h1>  
+        <p class="hero-subtitle">L'homme au service du peuple</p>  
+        <p class="hero-slogan">ENSEMBLE on est plus fort.</p>  
+    </div>  
+</section>  
+
+<main class="container">  
+      
+    <h2 class="section-title" id="apropos">À Propos</h2>  
+      
+    <div class="about-bg-section">  
+        <div class="about-block">  
+            <h3>Le Mot de Jonathan Kienge</h3>  
+            <p>Chers citoyens, mon engagement à vos côtés repose sur des valeurs claires de justice, de liberté et de solidarité. Ce site est notre plateforme d'échange pour bâtir ensemble un avenir meilleur et répondre efficacement aux aspirations de notre peuple.</p>  
+        </div>  
+
+        <div class="about-block">  
+            <h3>Notre Histoire & Parcours</h3>  
+            <p>Issu du cœur de nos réalités communes, notre mouvement s'est forgé sur le terrain, à l'écoute directe des besoins de la population. Face aux défis majeurs de notre époque, nous portons une alternative sérieuse, rigoureuse et résolument tournée vers le progrès social.</p>  
+        </div>  
+    </div>  
+
+    <div class="content-block">  
+        <h3 style="text-transform: uppercase; border-bottom: 2px solid #eee; padding-bottom: 8px; margin-bottom: 12px;">Qui est Jonathan Kienge Kashetu ?</h3>  
+        <p>Né à Lubumbashi, Jonathan Kienge Kashetu a poursuivi ses études en Belgique, à Bruxelles. Neveu du président Moïse Katumbi Chapwe, il s'est présenté aux élections du 12 décembre 2023 comme Candidat à la députation provinciale et à la députation Nationale.</p>  
+        <p>Bien qu'il n'ait pas été élu, il continue de montrer son courage et son dévouement à travers son ONG, SOS Enfants d'Éden. Jonathan a toujours la conviction qu'il occupera un jour une place importante dans le gouvernement de la République Démocratique du Congo.</p>  
+    </div>  
+
+    <h2 class="section-title" id="vision">Vision Politique</h2>  
+      
+    <div style="margin-bottom: 25px;">  
+        <p style="color: #555; margin-bottom: 15px; font-size: 0.95rem;">Cliquez sur chaque pilier pour découvrir le détail de nos propositions :</p>  
+          
+        <div class="accordion-item">  
+            <div class="accordion-header">  
+                <span>⚖️ Pilier 1 : Institutionnel & Justice</span>  
+                <span class="accordion-icon">▼</span>  
+            </div>  
+            <div class="accordion-content">  
+                <div class="accordion-body">  
+                    Restauration solide et sans concession de l'autorité de l'État sur toute l'étendue du territoire. Nous appliquerons une lutte transparente et implacable contre toute forme de corruption et de détournement de fonds publics, tout en garantissant un renforcement de la justice sociale et l'égalité absolue de tous devant la loi.  
+                </div>  
+            </div>  
+        </div>  
+
+        <div class="accordion-item">  
+            <div class="accordion-header">  
+                <span>📈 Pilier 2 : Économie & Emploi</span>  
+                <span class="accordion-icon">▼</span>  
+            </div>  
+            <div class="accordion-content">  
+                <div class="accordion-body">  
+                    Soutien de croissance massif aux entreprises locales et aux PME. Nous œuvrons pour la diversification des investissements afin de sortir de la dépendance exclusive des ressources minières, tout en développant des projets majeurs créateurs d'emplois durables pour la jeunesse.  
+                </div>  
+            </div>  
+        </div>  
+
+        <div class="accordion-item">  
+            <div class="accordion-header">  
+                <span>🎓 Pilier 3 : Éducation & Formations</span>  
+                <span class="accordion-icon">▼</span>  
+            </div>  
+            <div class="accordion-content">  
+                <div class="accordion-body">  
+                    Modernisation complète des infrastructures scolaires et universitaires à travers le pays. Nous instaurerons un programme de valorisation des compétences ainsi qu'une mise à niveau salariale décente des formateurs et des enseignants pour assurer un enseignement de qualité.  
+                </div>  
+            </div>  
+        </div>  
+
+        <div class="accordion-item">  
+            <div class="accordion-header">  
+                <span>🏥 Pilier 4 : Santé & Social</span>  
+                <span class="accordion-icon">▼</span>  
+            </div>  
+            <div class="accordion-content">  
+                <div class="accordion-body">  
+                    Mise en place d'un réseau solide de santé de proximité, équipé et accessible aux bourses les plus modestes. Réhabilitation des structures médicales de référence et renforcement des aides et mécanismes de protection sociale pour les citoyens les plus vulnérables.  
+                </div>  
+            </div>  
+        </div>  
+
+    </div>  
+
+    <h2 class="section-title" id="actualites">Actualités</h2>  
+      
+    <article class="card">  
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1000" alt="Réunion" class="card-image">  
+        <div class="card-content">  
+            <div class="card-meta">  
+                <span class="meta-tag">Communiqués</span>  
+                <span>04 Juin 2026</span>  
+            </div>  
+            <h2 class="card-title">Poursuite de notre restructuration et renforcement de notre implantation sur le terrain</h2>  
+            <p class="card-excerpt">Dans la continuité du vaste processus d'enracinement engagé par nos équipes, de nouvelles cellules de proximité voient le jour afin de porter au mieux notre message.</p>  
+            <a href="#" class="btn-more">Voir plus</a>  
+        </div>  
+    </article>  
+
+    <!-- GALERIE PHOTOS -->
+    <h2 class="section-title" id="galerie">Galerie Photos</h2>  
+    <div class="gallery">  
+        <img src="https://i.imgur.com/7AlN27T.jpeg" alt="Photo 1">  
+        <img src="https://i.imgur.com/WdR9nTu.jpeg" alt="Photo 2">  
+        <img src="https://i.imgur.com/tZuumax.jpeg" alt="Photo 3">  
+        <img src="https://i.imgur.com/puem7Bm_d.webp?maxwidth=760&fidelity=grand" alt="Photo 4">  
+    </div>  
+
+    <!-- LIGHTBOX CONTAINER MODERNE -->
+    <div class="lightbox" id="lightbox">  
+        <span class="close" id="closeLightbox">×</span>  
+        <img id="lightboxImg" src="">  
+    </div>  
+
+    <h2 class="section-title" id="agir">Agir & S'engager</h2>  
+      
+    <div class="content-block">  
+        <h3>Prenez part au changement</h3>  
+        <p>Parce qu'un projet d'avenir ne se construit pas seul, devenez un actor clé du mouvement en apportant vos compétences, vos idées ou votre soutien financier.</p>  
+          
+        <div class="action-zone">  
+            <a href="#" class="btn-action">👤 Devenir Membre / Adhérer</a>  
+            <a href="#" class="btn-action" style="background-color: #001f4d;">💳 Faire un Don / Soutenir</a>  
+        </div>  
+    </div>  
+
+</main>  
+
+<footer>  
+    <div class="footer-section">  
+        <h3 class="footer-title">Bureau du Président</h3>  
+        <p class="footer-text">  
+            Av. , n° , Quartier ,<br>  
+            Commune Lubumbashi, Ville de Lubumbashi<br>  
+            <strong>Email :</strong> .....  
+        </p>  
+    </div>  
+
+    <div class="footer-section">  
+        <h3 class="footer-title">Nos Canaux Digitaux</h3>  
+        <div class="social-links">  
+            <a href="https://facebook.com/TON_PAGE" target="_blank">📘 Facebook</a>  
+            <a href="https://x.com/j_kashetu" target="_blank">𝕏 Twitter</a>  
+                        <a href="https://www.instagram.com/jonathan_kienge?igsh=aXQ2M3RsdHl1c2J5" target="_blank">📸 Instagram</a>
+  
+        </div>  
+    </div>  
+
+    <div class="footer-bottom">  
+        Copyright © JONATHAN KIENGE - Tous droits réservés.  
+    </div>  
+</footer>  
+
+<a href="#" class="scroll-top">▲</a>  
+
+<script>  
+    document.addEventListener('DOMContentLoaded', function () {  
+          
+        // 1. GESTION DES ACCORDÉONS  
+        const headers = document.querySelectorAll('.accordion-header');  
+          
+        headers.forEach(header => {  
+            header.addEventListener('click', function () {  
+                const item = this.parentElement;  
+                const content = this.nextElementSibling;  
+                  
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {  
+                    if (otherItem !== item && otherItem.classList.contains('active')) {  
+                        otherItem.classList.remove('active');  
+                        otherItem.querySelector('.accordion-content').style.maxHeight = null;  
+                    }  
+                });  
+                  
+                item.classList.toggle('active');  
+                  
+                if (item.classList.contains('active')) {  
+                    content.style.maxHeight = content.scrollHeight + "px";  
+                } else {  
+                    content.style.maxHeight = null;  
+                }  
+            });  
+        });  
+
+        // 2. GESTION DU MENU BURGER CORRIGÉE
+        const burgerBtn = document.getElementById('burger-menu-btn');  
+        const menuDropdown = document.getElementById('menu-dropdown');  
+          
+        burgerBtn.addEventListener('click', function () {  
+            menuDropdown.classList.toggle('active');  
+            burgerBtn.classList.toggle('active');  
+        });  
+
+        document.querySelectorAll('#menu-dropdown a').forEach(link => {  
+            link.addEventListener('click', () => {  
+                menuDropdown.classList.remove('active');  
+                burgerBtn.classList.remove('active');  
+            });  
+        });  
+
+        // 3. LIGHTBOX GALERIE
+        const images = document.querySelectorAll('.gallery img');  
+        const lightbox = document.getElementById('lightbox');  
+        const lightboxImg = document.getElementById('lightboxImg');  
+        const closeLightbox = document.getElementById('closeLightbox');  
+
+        images.forEach(img => {  
+            img.addEventListener('click', () => {  
+                lightbox.classList.add('active');  
+                lightboxImg.src = img.src;  
+            });  
+        });  
+
+        closeLightbox.addEventListener('click', () => {  
+            lightbox.classList.remove('active');  
+        });  
+
+        lightbox.addEventListener('click', (e) => {  
+            if (e.target === lightbox) {  
+                lightbox.classList.remove('active');  
+            }  
+        });  
+    });  
+</script>
+
+</body>  
+</html>
